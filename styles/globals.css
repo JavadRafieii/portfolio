@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+@layer components {
+    .sora-100 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 100;
+        font-style: normal;
+    }
+
+    .sora-200 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+    }
+
+    .sora-300 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    .sora-400 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .sora-500 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    .sora-600 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+    }
+
+    .sora-700 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    .sora-800 {
+        font-family: "Sora", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: normal;
+    }
+
+    .circle {
+        position: relative;
+    }
+
+    .circle:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 322px;
+        height: 308px;
+        border-radius: 50%;
+        background: #8750f7;
+        background: -o-linear-gradient(190deg, #8750f7 0%, rgba(115, 67, 210, 0) 100%);
+        background: linear-gradient(260deg, #8750f7 0%, rgba(115, 67, 210, 0) 100%);
+        -webkit-filter: blur(150px);
+        filter: blur(150px);
+        margin-right: -5%;
+        margin-top: -5%;
+        z-index: 0;
+    }
+
+    .circle::after {
+        content: "";
+        position: absolute;
+        bottom: 200px;
+        right: 0;
+        width: 322px;
+        height: 308px;
+        border-radius: 50%;
+        background: #8750f7;
+        background: -o-linear-gradient(190deg, #8750f7 0%, rgba(115, 67, 210, 0) 100%);
+        background: linear-gradient(260deg, #8750f7 0%, rgba(115, 67, 210, 0) 100%);
+        -webkit-filter: blur(150px);
+        filter: blur(150px);
+        margin-right: calc(40% - 161px);
+        margin-top: -5%;
+        z-index: 0;
+    }
+}
