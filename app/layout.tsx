@@ -1,16 +1,51 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const lahzeh = localFont({
+  src: [
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-Thin.ttf",
+      weight: "100",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-ExtraLight.ttf",
+      weight: "200",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-Light.ttf",
+      weight: "300",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-Regular.ttf",
+      weight: "400",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-Medium.ttf",
+      weight: "500",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-SemiBold.ttf",
+      weight: "600",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-Bold.ttf",
+      weight: "700",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-ExtraBold.ttf",
+      weight: "800",
+    },
+    {
+      path: "../public/fonts/Lahzeh/Lahzeh-Black.ttf",
+      weight: "900",
+    },
+  ],
+  variable: "--font-lahzeh",
+  display: "swap",
+  fallback: ["Tahoma", "Arial", "sans-serif"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,8 +55,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      dir="rtl"
+      lang="fa"
+      className={`${lahzeh.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
