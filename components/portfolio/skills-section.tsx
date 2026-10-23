@@ -2,20 +2,29 @@
 
 import { useRef, useState } from "react";
 import { PlusIcon, Trash2Icon } from "lucide-react";
+import type {
+  PortfolioSkill,
+  SkillLevel,
+} from "@/lib/portfolio/types";
 
-type SkillLevel = "" | "beginner" | "intermediate" | "advanced";
-
-type Skill = {
+type Skill = Omit<PortfolioSkill, "level"> & {
   id: number;
-  name: string;
-  level: SkillLevel;
+  level: SkillLevel | "";
 };
 
-export default function SkillsSection() {
-  const nextId = useRef(1);
-  const [skills, setSkills] = useState<Skill[]>([
-    { id: 0, name: "", level: "" },
-  ]);
+export default function SkillsSection({
+  initialSkills,
+}: {
+  initialSkills: PortfolioSkill[] | undefined;
+}) {
+  const [skills, setSkills] = useState<Skill[]>(() => {
+    const initialValues: Skill[] = initialSkills?.length
+      ? initialSkills.map((skill, id) => ({ id, ...skill }))
+      : [{ id: 0, name: "", level: "" }];
+
+    return initialValues;
+  });
+  const nextId = useRef(skills.length);
 
   function addSkill() {
     if (skills.length >= 10) return;

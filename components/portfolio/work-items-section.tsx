@@ -2,18 +2,23 @@
 
 import { useRef, useState } from "react";
 import { PlusIcon, Trash2Icon } from "lucide-react";
+import type { PortfolioWorkItem } from "@/lib/portfolio/types";
 
-type WorkItem = {
+type WorkItem = PortfolioWorkItem & {
   id: number;
-  title: string;
-  description: string;
 };
 
-export default function WorkItemsSection() {
-  const nextId = useRef(1);
-  const [items, setItems] = useState<WorkItem[]>([
-    { id: 0, title: "", description: "" },
-  ]);
+export default function WorkItemsSection({
+  initialItems,
+}: {
+  initialItems: PortfolioWorkItem[] | undefined;
+}) {
+  const [items, setItems] = useState<WorkItem[]>(() =>
+    (initialItems?.length ? initialItems : [{ title: "", description: "" }]).map(
+      (item, id) => ({ id, ...item }),
+    ),
+  );
+  const nextId = useRef(items.length);
 
   function addItem() {
     if (items.length >= 10) return;

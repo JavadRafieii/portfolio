@@ -2,15 +2,10 @@
 
 import { useRef, useState } from "react";
 import { PlusIcon, Trash2Icon } from "lucide-react";
+import type { PortfolioExperience } from "@/lib/portfolio/types";
 
-type Experience = {
+type Experience = PortfolioExperience & {
   id: number;
-  startDate: string;
-  endDate: string;
-  company: string;
-  jobTitle: string;
-  location: string;
-  description: string;
 };
 
 const emptyExperience = (id: number): Experience => ({
@@ -23,11 +18,18 @@ const emptyExperience = (id: number): Experience => ({
   description: "",
 });
 
-export default function ExperiencesSection() {
-  const nextId = useRef(1);
-  const [experiences, setExperiences] = useState<Experience[]>([
-    emptyExperience(0),
-  ]);
+export default function ExperiencesSection({
+  initialExperiences,
+}: {
+  initialExperiences: PortfolioExperience[] | undefined;
+}) {
+  const [experiences, setExperiences] = useState<Experience[]>(() =>
+    (initialExperiences?.length
+      ? initialExperiences
+      : [emptyExperience(0)]
+    ).map((experience, id) => ({ id, ...experience })),
+  );
+  const nextId = useRef(experiences.length);
 
   function addExperience() {
     if (experiences.length >= 10) return;

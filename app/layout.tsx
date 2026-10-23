@@ -33,7 +33,7 @@ export default function RootLayout({
     <html
       dir="rtl"
       lang="fa"
-      className={`${lahzeh.variable} h-full antialiased`}
+      className={`${lahzeh.variable} h-full`}
     >
       <body className="bg-[#f4f4f4]">{children}</body>
     </html>
