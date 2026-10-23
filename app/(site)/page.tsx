@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 
 import { getPortfolioProfile } from "@/lib/portfolio/data";
+import { getPortfolioReviews } from "@/lib/portfolio/reviews";
 
 export default function HomePage() {
   return (
     <div>
-      <div>HomePage</div>
       <Suspense fallback={<div aria-hidden="true" className="size-10" />}>
         <PortfolioFormWithSavedData />
       </Suspense>
@@ -14,8 +14,10 @@ export default function HomePage() {
 }
 
 async function PortfolioFormWithSavedData() {
-  const profile = await getPortfolioProfile();
+  const [profile, reviews] = await Promise.all([
+    getPortfolioProfile(),
+    getPortfolioReviews(),
+  ]);
 
-  console.log("profile", profile);
-  return <div>PortfolioFormWithSavedData</div>;
+  return <div>HomePage</div>;
 }

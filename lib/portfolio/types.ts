@@ -63,6 +63,15 @@ type PortfolioProfileRow = {
   updated_at: string;
 };
 
+type PortfolioReviewRow = {
+  id: string;
+  email: string;
+  name: string;
+  opinion: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -71,6 +80,13 @@ export type Database = {
         Insert: Omit<PortfolioProfileRow, "created_at" | "updated_at"> &
           Partial<Pick<PortfolioProfileRow, "created_at" | "updated_at">>;
         Update: Partial<PortfolioProfileRow>;
+        Relationships: [];
+      };
+      portfolio_reviews: {
+        Row: PortfolioReviewRow;
+        Insert: Omit<PortfolioReviewRow, "id" | "created_at" | "updated_at"> &
+          Partial<Pick<PortfolioReviewRow, "id" | "created_at" | "updated_at">>;
+        Update: Partial<PortfolioReviewRow>;
         Relationships: [];
       };
     };

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { connection } from "next/server";
 
 import { auth } from "@/auth";
 import { DropdownMenuAvatar } from "@/components/shared/dropdown-menu-avatar";
@@ -30,6 +31,7 @@ export default function Navigation() {
 }
 
 async function AccountMenu() {
+  await connection();
   const session = await auth();
   const user = session?.user;
 
