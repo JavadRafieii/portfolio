@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer";
 import Navigation from "@/components/layout/navigation";
 
 export default function SiteLayout({ children }: LayoutProps<"/">) {
@@ -5,6 +6,7 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
     <>
       <Navigation />
       {children}
+      <Footer />
     </>
   );
 }

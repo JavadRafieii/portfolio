@@ -33,7 +33,7 @@ export function DropdownMenuAvatar({ user }: DropdownMenuAvatarProps) {
             variant="ghost"
             size="icon"
             className="rounded-full"
-            // aria-label={user ? "منوی حساب کاربری" : "ورود به حساب کاربری"}
+            aria-label={user ? "منوی حساب کاربری" : "ورود به حساب کاربری"}
           >
             <Avatar className="size-10">
               <AvatarFallback>

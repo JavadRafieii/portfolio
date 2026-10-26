@@ -7,20 +7,56 @@ import { DropdownMenuAvatar } from "@/components/shared/dropdown-menu-avatar";
 
 export default function Navigation() {
   return (
-    <header className="sticky top-12 z-50 backdrop-blur-2xl blur-0 w-full border border-black">
-      <div className="w-full max-w-7xl top-0 py-2 md:py-2 px-4 sm:px-6 lg:px-8 border border-black mx-auto flex flex-row justify-between items-center">
-        <ul className="flex flex-row gap-10 items-center text-[#4a5565] text-sm font-medium">
-          <li>
-            <Link href="/">خانه</Link>
-          </li>
-          <li>
-            <Link href="/about">درباره ما</Link>
-          </li>
-          <li>
-            <Link href="/contact">تماس با ما</Link>
-          </li>
-        </ul>
-        <div className="flex flex-row items-center">
+    <header className="sticky top-3 z-50 w-full px-3 sm:px-6">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 rounded-2xl border border-white/80 bg-white/85 p-2 shadow-lg shadow-slate-900/5 backdrop-blur-xl sm:gap-4 sm:px-4">
+        <Link
+          href="/"
+          aria-label="جواد رفیعی، صفحهٔ اصلی"
+          className="flex shrink-0 items-center gap-2.5 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
+        >
+          <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-sm font-black tracking-wide text-white shadow-md shadow-blue-600/20">
+            JR
+          </span>
+          <span className="hidden sm:block">
+            <span className="block text-sm font-black text-slate-900">
+              جواد رفیعی
+            </span>
+            <span className="mt-0.5 block text-xs text-slate-500">
+              طراح و توسعه‌دهنده
+            </span>
+          </span>
+        </Link>
+
+        <nav aria-label="ناوبری اصلی">
+          <ul className="flex items-center gap-0.5 text-slate-600 sm:gap-1">
+            <li>
+              <Link
+                href="/"
+                className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
+              >
+                خانه
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
+              >
+                درباره من
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
+              >
+                تماس
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <Suspense fallback={<div aria-hidden="true" className="size-10" />}>
             <AccountMenu />
           </Suspense>

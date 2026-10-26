@@ -5,13 +5,14 @@ import { auth } from "@/auth";
 
 import DashboardNavigation from "@/components/layout/dashboard-navigation";
 import MainContainer from "@/components/layout/main-container";
+import FullPageLoader from "@/components/shared/full-page-loader";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserIcon } from "lucide-react";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <Suspense fallback={<div>در حال بارگذاری داشبورد...</div>}>
+    <Suspense fallback={<FullPageLoader label="در حال آماده‌سازی داشبورد" />}>
       <AuthenticatedDashboardLayout>{children}</AuthenticatedDashboardLayout>
     </Suspense>
   );

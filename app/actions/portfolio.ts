@@ -47,12 +47,13 @@ function getRows(
   formData: FormData,
   collection: string,
   fields: readonly string[],
+  maxRows = 10,
 ) {
   const rows: string[][] = [];
   const expectedNames = new Set<string>();
   let foundGap = false;
 
-  for (let index = 0; index < 10; index += 1) {
+  for (let index = 0; index < maxRows; index += 1) {
     const names = fields.map((field) => `${collection}[${index}].${field}`);
     const entriesByField = names.map((name) => formData.getAll(name));
     const isMissingRow = entriesByField.every((entries) => entries.length === 0);
@@ -159,7 +160,7 @@ export async function savePortfolio(
     "location",
     "description",
   ]);
-  const skillRows = getRows(formData, "skills", ["name", "level"]);
+  const skillRows = getRows(formData, "skills", ["name", "level"], 20);
 
   if (
     !Number.isSafeInteger(yearsOfExperience) ||
@@ -244,10 +245,12 @@ export async function savePortfolio(
     console.error("Failed to save portfolio data to Supabase:", {
       code: error.code,
       message: error.message,
+      details: error.details,
+      hint: error.hint,
     });
     return {
       status: "error",
-      message: "ذخیره‌سازی در Supabase انجام نشد؛ تنظیمات جدول را بررسی کنید.",
+      message: `ذخیره‌سازی در Supabase انجام نشد (${error.code}): ${error.message}`,
     };
   }
 

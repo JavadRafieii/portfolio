@@ -7,6 +7,8 @@ import type {
   SkillLevel,
 } from "@/lib/portfolio/types";
 
+const MAX_SKILLS = 20;
+
 type Skill = Omit<PortfolioSkill, "level"> & {
   id: number;
   level: SkillLevel | "";
@@ -27,7 +29,7 @@ export default function SkillsSection({
   const nextId = useRef(skills.length);
 
   function addSkill() {
-    if (skills.length >= 10) return;
+    if (skills.length >= MAX_SKILLS) return;
 
     const id = nextId.current++;
     setSkills((items) => [...items, { id, name: "", level: "" }]);
@@ -54,11 +56,11 @@ export default function SkillsSection({
         <button
           type="button"
           onClick={addSkill}
-          disabled={skills.length >= 10}
+          disabled={skills.length >= MAX_SKILLS}
           className="inline-flex items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
         >
           <PlusIcon aria-hidden="true" size={16} />
-          افزودن مهارت
+          افزودن مهارت ({skills.length}/{MAX_SKILLS})
         </button>
       </div>
 
