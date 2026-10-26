@@ -84,6 +84,6 @@ export async function savePortfolioReview(
 
   return {
     status: "success",
-    message: "نظر شما با موفقیت ثبت شد.",
+    message: "دیدگاه شما با موفقیت ذخیره شد.",
   };
 }

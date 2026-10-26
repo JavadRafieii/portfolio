@@ -20,11 +20,7 @@ export default function SkillsSection({
   initialSkills: PortfolioSkill[] | undefined;
 }) {
   const [skills, setSkills] = useState<Skill[]>(() => {
-    const initialValues: Skill[] = initialSkills?.length
-      ? initialSkills.map((skill, id) => ({ id, ...skill }))
-      : [{ id: 0, name: "", level: "" }];
-
-    return initialValues;
+    return (initialSkills ?? []).map((skill, id) => ({ id, ...skill }));
   });
   const nextId = useRef(skills.length);
 
@@ -49,19 +45,13 @@ export default function SkillsSection({
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="skills-heading">
-      <div className="flex items-center justify-between gap-4">
+      <div>
         <h2 id="skills-heading" className="text-base font-semibold">
-          مهارت‌ها
+          مهارت‌ها و تخصص‌ها
         </h2>
-        <button
-          type="button"
-          onClick={addSkill}
-          disabled={skills.length >= MAX_SKILLS}
-          className="inline-flex items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <PlusIcon aria-hidden="true" size={16} />
-          افزودن مهارت ({skills.length}/{MAX_SKILLS})
-        </button>
+        <p className="mt-1 text-sm text-muted-foreground">
+          نام مهارت و سطح تسلط خود را مشخص کنید؛ حداکثر ۲۰ مهارت.
+        </p>
       </div>
 
       {skills.map((skill, index) => (
@@ -124,19 +114,27 @@ export default function SkillsSection({
               <option value="advanced">پیشرفته</option>
             </select>
           </div>
-          {skills.length > 1 ? (
-            <button
-              type="button"
-              onClick={() => removeSkill(skill.id)}
-              aria-label={`حذف مهارت ${index + 1}`}
-              className="inline-flex w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
-            >
-              <Trash2Icon aria-hidden="true" size={16} />
-              حذف مهارت
-            </button>
-          ) : null}
+          <button
+            type="button"
+            onClick={() => removeSkill(skill.id)}
+            aria-label={`حذف مهارت ${index + 1}`}
+            className="inline-flex w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
+          >
+            <Trash2Icon aria-hidden="true" size={16} />
+            حذف مهارت
+          </button>
         </fieldset>
       ))}
+
+      <button
+        type="button"
+        onClick={addSkill}
+        disabled={skills.length >= MAX_SKILLS}
+        className="inline-flex w-fit items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <PlusIcon aria-hidden="true" size={16} />
+        افزودن مهارت ({skills.length}/{MAX_SKILLS})
+      </button>
     </section>
   );
 }

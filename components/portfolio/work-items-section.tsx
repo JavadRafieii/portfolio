@@ -14,9 +14,7 @@ export default function WorkItemsSection({
   initialItems: PortfolioWorkItem[] | undefined;
 }) {
   const [items, setItems] = useState<WorkItem[]>(() =>
-    (initialItems?.length ? initialItems : [{ title: "", description: "" }]).map(
-      (item, id) => ({ id, ...item }),
-    ),
+    (initialItems ?? []).map((item, id) => ({ id, ...item })),
   );
   const nextId = useRef(items.length);
 
@@ -46,19 +44,14 @@ export default function WorkItemsSection({
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="work-items-heading">
-      <div className="flex items-center justify-between gap-4">
+      <div>
         <h2 id="work-items-heading" className="text-base font-semibold">
-         کاری که من انجام می‌دهم
+          خدمات و کارهایی که انجام می‌دهم
         </h2>
-        <button
-          type="button"
-          onClick={addItem}
-          disabled={items.length >= 10}
-          className="inline-flex items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <PlusIcon aria-hidden="true" size={16} />
-          افزودن مورد
-        </button>
+        <p className="mt-1 text-sm text-muted-foreground">
+          خدمات یا حوزه‌هایی را که در آن‌ها به مشتریان کمک می‌کنید ثبت کنید؛
+          حداکثر ۱۰ مورد.
+        </p>
       </div>
 
       {items.map((item, index) => (
@@ -105,19 +98,27 @@ export default function WorkItemsSection({
               className="w-full resize-y rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
-          {items.length > 1 ? (
-            <button
-              type="button"
-              onClick={() => removeItem(item.id)}
-              aria-label={`حذف مورد ${index + 1}`}
-              className="inline-flex w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
-            >
-              <Trash2Icon aria-hidden="true" size={16} />
-              حذف مورد
-            </button>
-          ) : null}
+          <button
+            type="button"
+            onClick={() => removeItem(item.id)}
+            aria-label={`حذف مورد ${index + 1}`}
+            className="inline-flex w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
+          >
+            <Trash2Icon aria-hidden="true" size={16} />
+            حذف مورد
+          </button>
         </fieldset>
       ))}
+
+      <button
+        type="button"
+        onClick={addItem}
+        disabled={items.length >= 10}
+        className="inline-flex w-fit items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <PlusIcon aria-hidden="true" size={16} />
+        افزودن مورد ({items.length}/10)
+      </button>
     </section>
   );
 }

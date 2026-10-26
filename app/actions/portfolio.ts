@@ -5,6 +5,7 @@ import { isPortfolioAdmin } from "@/lib/portfolio/access";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type {
   PortfolioStatus,
+  PortfolioProject,
   PortfolioSkill,
 } from "@/lib/portfolio/types";
 
@@ -48,6 +49,7 @@ function getRows(
   collection: string,
   fields: readonly string[],
   maxRows = 10,
+  allowEmpty = false,
 ) {
   const rows: string[][] = [];
   const expectedNames = new Set<string>();
@@ -84,7 +86,7 @@ function getRows(
     (name) => name.startsWith(`${collection}[`) && !expectedNames.has(name),
   );
 
-  return rows.length > 0 && !hasUnexpectedField ? rows : null;
+  return (allowEmpty || rows.length > 0) && !hasUnexpectedField ? rows : null;
 }
 
 function isValidDate(value: string) {
@@ -97,6 +99,18 @@ function isValidDate(value: string) {
     !Number.isNaN(date.getTime()) &&
     date.toISOString().slice(0, 10) === value
   );
+}
+
+function isValidExternalUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return (
+      (url.protocol === "https:" || url.protocol === "http:") &&
+      url.hostname.length > 0
+    );
+  } catch {
+    return false;
+  }
 }
 
 export async function savePortfolio(
@@ -151,27 +165,79 @@ export async function savePortfolio(
   }
 
   const yearsOfExperience = Number(rawYears);
-  const workRows = getRows(formData, "workItems", ["title", "description"]);
-  const experienceRows = getRows(formData, "experiences", [
-    "startDate",
-    "endDate",
-    "company",
-    "jobTitle",
-    "location",
-    "description",
-  ]);
-  const skillRows = getRows(formData, "skills", ["name", "level"], 20);
+  const workRows = getRows(
+    formData,
+    "workItems",
+    ["title", "description"],
+    10,
+    true,
+  );
+  const projectRows = getRows(
+    formData,
+    "projects",
+    ["title", "category", "description", "technologies", "href"],
+    10,
+    true,
+  );
+  const experienceRows = getRows(
+    formData,
+    "experiences",
+    [
+      "startDate",
+      "endDate",
+      "company",
+      "jobTitle",
+      "location",
+      "description",
+    ],
+    10,
+    true,
+  );
+  const skillRows = getRows(formData, "skills", ["name", "level"], 20, true);
 
   if (
     !Number.isSafeInteger(yearsOfExperience) ||
     !workRows ||
+    !projectRows ||
     !experienceRows ||
-    !skillRows
+    !skillRows ||
+    experienceRows.length > 10
   ) {
     return {
       status: "error",
-      message: "فهرست کارها، تجربیات یا مهارت‌ها کامل و معتبر نیست.",
+      message:
+        "فهرست کارها، نمونه‌کارها، تجربیات یا مهارت‌ها کامل و معتبر نیست. حداکثر ۱۰ تجربه کاری مجاز است.",
     };
+  }
+
+  const projects: PortfolioProject[] = [];
+  for (const [
+    title,
+    category,
+    projectDescription,
+    rawTechnologies,
+    href,
+  ] of projectRows) {
+    const technologies = rawTechnologies
+      .split(",")
+      .map((technology) => technology.trim())
+      .filter(Boolean);
+
+    if (!technologies.length || !isValidExternalUrl(href)) {
+      return {
+        status: "error",
+        message:
+          "برای هر نمونه‌کار حداقل یک تکنولوژی و یک لینک معتبر HTTP یا HTTPS وارد کنید.",
+      };
+    }
+
+    projects.push({
+      title,
+      category,
+      description: projectDescription,
+      technologies,
+      href,
+    });
   }
 
   const experiences = experienceRows.map(
@@ -234,6 +300,7 @@ export async function savePortfolio(
         title: itemTitle,
         description: details,
       })),
+      projects,
       experiences,
       skills,
       updated_at: new Date().toISOString(),
@@ -259,6 +326,6 @@ export async function savePortfolio(
 
   return {
     status: "success",
-    message: "اطلاعات فرم با موفقیت در Supabase ذخیره شد.",
+    message: "تغییرات با موفقیت ذخیره شد.",
   };
 }

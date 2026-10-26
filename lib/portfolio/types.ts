@@ -6,6 +6,14 @@ export type PortfolioWorkItem = {
   description: string;
 };
 
+export type PortfolioProject = {
+  title: string;
+  category: string;
+  description: string;
+  technologies: string[];
+  href: string;
+};
+
 export type PortfolioExperience = {
   startDate: string;
   endDate: string;
@@ -32,6 +40,7 @@ export type PortfolioProfileValues = {
   location: string;
   yearsOfExperience: number;
   workItems: PortfolioWorkItem[];
+  projects: PortfolioProject[];
   experiences: PortfolioExperience[];
   skills: PortfolioSkill[];
 };
@@ -57,6 +66,7 @@ type PortfolioProfileRow = {
   location: string;
   years_of_experience: number;
   work_items: Json;
+  projects: Json;
   experiences: Json;
   skills: Json;
   created_at: string;

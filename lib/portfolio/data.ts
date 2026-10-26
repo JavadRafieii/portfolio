@@ -4,6 +4,7 @@ import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type {
   PortfolioExperience,
   PortfolioProfileValues,
+  PortfolioProject,
   PortfolioSkill,
   PortfolioStatus,
   PortfolioWorkItem,
@@ -30,6 +31,20 @@ function isExperience(value: unknown): value is PortfolioExperience {
     typeof value.jobTitle === "string" &&
     typeof value.location === "string" &&
     typeof value.description === "string"
+  );
+}
+
+function isProject(value: unknown): value is PortfolioProject {
+  return (
+    isObject(value) &&
+    typeof value.title === "string" &&
+    typeof value.category === "string" &&
+    typeof value.description === "string" &&
+    Array.isArray(value.technologies) &&
+    value.technologies.every(
+      (technology): technology is string => typeof technology === "string",
+    ) &&
+    typeof value.href === "string"
   );
 }
 
@@ -66,7 +81,7 @@ export async function getPortfolioProfile(): Promise<PortfolioProfileValues | nu
   const { data, error } = await supabase
     .from("portfolio_profiles")
     .select(
-      "welcome_message, title, description, about_title, about_description, email, phone, status, location, years_of_experience, work_items, experiences, skills",
+      "welcome_message, title, description, about_title, about_description, email, phone, status, location, years_of_experience, work_items, projects, experiences, skills",
     )
     .eq("id", 1)
     .maybeSingle();
@@ -95,6 +110,7 @@ export async function getPortfolioProfile(): Promise<PortfolioProfileValues | nu
     location: data.location,
     yearsOfExperience: data.years_of_experience,
     workItems: parseArray(data.work_items, isWorkItem, "work_items"),
+    projects: parseArray(data.projects, isProject, "projects"),
     experiences: parseArray(data.experiences, isExperience, "experiences"),
     skills: parseArray(data.skills, isSkill, "skills"),
   };

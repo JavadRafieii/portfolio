@@ -31,7 +31,7 @@ async function PortfolioSections() {
       <HeroSection profile={profile} />
       <AboutSection profile={profile} />
       <SkillsSection skills={profile?.skills ?? []} />
-      <ProjectsSection />
+      <ProjectsSection projects={profile?.projects ?? []} />
       <ExperienceSection experiences={profile?.experiences ?? []} />
       <ServicesSection items={profile?.workItems ?? []} />
       <VisitorComments comments={comments} />

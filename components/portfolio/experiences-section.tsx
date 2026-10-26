@@ -24,10 +24,7 @@ export default function ExperiencesSection({
   initialExperiences: PortfolioExperience[] | undefined;
 }) {
   const [experiences, setExperiences] = useState<Experience[]>(() =>
-    (initialExperiences?.length
-      ? initialExperiences
-      : [emptyExperience(0)]
-    ).map((experience, id) => ({ id, ...experience })),
+    (initialExperiences ?? []).map((experience, id) => ({ id, ...experience })),
   );
   const nextId = useRef(experiences.length);
 
@@ -56,19 +53,14 @@ export default function ExperiencesSection({
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="experiences-heading">
-      <div className="flex items-center justify-between gap-4">
+      <div>
         <h2 id="experiences-heading" className="text-base font-semibold">
-          تجربیات
+          سوابق کاری
         </h2>
-        <button
-          type="button"
-          onClick={addExperience}
-          disabled={experiences.length >= 10}
-          className="inline-flex items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <PlusIcon aria-hidden="true" size={16} />
-          افزودن تجربه
-        </button>
+        <p className="mt-1 text-sm text-muted-foreground">
+          سابقه‌های شغلی را با تاریخ شروع و پایان وارد کنید؛ حداکثر ۱۰ مورد.
+          انتخاب تاریخ‌های گذشته مجاز است.
+        </p>
       </div>
 
       {experiences.map((experience, index) => (
@@ -85,12 +77,13 @@ export default function ExperiencesSection({
                 htmlFor={`experience-${experience.id}-start-date`}
                 className="text-sm font-medium"
               >
-                از تاریخ:
+                تاریخ شروع:
               </label>
               <input
                 id={`experience-${experience.id}-start-date`}
                 name={`experiences[${index}].startDate`}
                 type="date"
+                dir="ltr"
                 required
                 value={experience.startDate}
                 onChange={(event) =>
@@ -100,7 +93,7 @@ export default function ExperiencesSection({
                     event.currentTarget.value,
                   )
                 }
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -108,14 +101,14 @@ export default function ExperiencesSection({
                 htmlFor={`experience-${experience.id}-end-date`}
                 className="text-sm font-medium"
               >
-                تا تاریخ:
+                تاریخ پایان:
               </label>
               <input
                 id={`experience-${experience.id}-end-date`}
                 name={`experiences[${index}].endDate`}
                 type="date"
+                dir="ltr"
                 required
-                min={experience.startDate || undefined}
                 value={experience.endDate}
                 onChange={(event) =>
                   updateExperience(
@@ -124,9 +117,12 @@ export default function ExperiencesSection({
                     event.currentTarget.value,
                   )
                 }
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
+            <p className="text-xs text-muted-foreground">
+              تاریخ پایان باید هم‌زمان با تاریخ شروع یا بعد از آن باشد.
+            </p>
           </div>
           <div className="flex flex-col gap-2">
             <label
@@ -220,19 +216,27 @@ export default function ExperiencesSection({
               className="w-full resize-y rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
-          {experiences.length > 1 ? (
-            <button
-              type="button"
-              onClick={() => removeExperience(experience.id)}
-              aria-label={`حذف تجربهٔ ${index + 1}`}
-              className="inline-flex w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
-            >
-              <Trash2Icon aria-hidden="true" size={16} />
-              حذف تجربه
-            </button>
-          ) : null}
+          <button
+            type="button"
+            onClick={() => removeExperience(experience.id)}
+            aria-label={`حذف تجربهٔ ${index + 1}`}
+            className="inline-flex w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
+          >
+            <Trash2Icon aria-hidden="true" size={16} />
+            حذف تجربه
+          </button>
         </fieldset>
       ))}
+
+      <button
+        type="button"
+        onClick={addExperience}
+        disabled={experiences.length >= 10}
+        className="inline-flex w-fit items-center gap-2 rounded-lg border border-input px-3 py-2 text-sm font-medium transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <PlusIcon aria-hidden="true" size={16} />
+        افزودن تجربه ({experiences.length}/10)
+      </button>
     </section>
   );
 }
