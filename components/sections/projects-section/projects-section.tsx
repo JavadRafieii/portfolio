@@ -15,7 +15,7 @@ export default function ProjectsSection({
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="my-30 w-full space-y-8"
+      className="my-30 scroll-mt-28 w-full space-y-8"
     >
       <header className="max-w-2xl space-y-3">
         <p className="inline-flex items-center gap-2 font-semibold text-blue-700">

@@ -11,8 +11,9 @@ type HeroSectionProps = {
 export default function HeroSection({ profile }: HeroSectionProps) {
   return (
     <section
+      id="home"
       aria-labelledby="hero-title"
-      className="my-30 grid grid-cols-2 gap-10"
+      className="my-30 scroll-mt-28 grid grid-cols-2 gap-10"
     >
       <div>
         <p className="inline-flex items-center gap-2 font-medium text-blue-700">

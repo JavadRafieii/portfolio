@@ -4,6 +4,7 @@ import { connection } from "next/server";
 
 import { auth } from "@/auth";
 import { DropdownMenuAvatar } from "@/components/shared/dropdown-menu-avatar";
+import NavigationLinks from "@/components/layout/navigation-links";
 
 export default function Navigation() {
   return (
@@ -27,34 +28,7 @@ export default function Navigation() {
           </span>
         </Link>
 
-        <nav aria-label="ناوبری اصلی">
-          <ul className="flex items-center gap-0.5 text-slate-600 sm:gap-1">
-            <li>
-              <Link
-                href="/"
-                className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
-              >
-                خانه
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
-              >
-                درباره من
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
-              >
-                تماس
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <NavigationLinks />
 
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <Suspense fallback={<div aria-hidden="true" className="size-10" />}>

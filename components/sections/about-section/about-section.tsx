@@ -34,8 +34,9 @@ export default function AboutSection({ profile }: AboutSectionProps) {
 
   return (
     <section
+      id="about"
       aria-labelledby="about-title"
-      className="my-30 w-full rounded-[2rem] border border-slate-100 bg-white p-5 shadow-xl shadow-slate-900/[0.04] sm:p-8 lg:p-10"
+      className="my-30 scroll-mt-28 w-full rounded-[2rem] border border-slate-100 bg-white p-5 shadow-xl shadow-slate-900/[0.04] sm:p-8 lg:p-10"
     >
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:gap-8">
         <div className="relative overflow-hidden py-4 sm:py-8 lg:py-10">

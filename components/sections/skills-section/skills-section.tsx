@@ -76,8 +76,9 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
 
   return (
     <section
+      id="skills"
       aria-labelledby="skills-heading"
-      className="relative isolate my-30 w-full overflow-hidden rounded-[2rem] border border-blue-100 bg-gradient-to-br from-slate-50 via-white to-blue-50/80 p-5 sm:p-8 lg:p-10"
+      className="relative isolate my-30 scroll-mt-28 w-full overflow-hidden rounded-[2rem] border border-blue-100 bg-gradient-to-br from-slate-50 via-white to-blue-50/80 p-5 sm:p-8 lg:p-10"
     >
       <div
         aria-hidden="true"
