@@ -2,17 +2,7 @@
 
 import Link from "next/link";
 import type { MouseEvent } from "react";
-
-const navigationItems = [
-  { label: "خانه", href: "/#home" },
-  { label: "درباره من", href: "/#about" },
-  { label: "مهارت‌ها", href: "/#skills" },
-  { label: "نمونه‌کارها", href: "/#projects" },
-  { label: "تجربه کاری", href: "/#experience" },
-  { label: "خدمات", href: "/#services" },
-  { label: "دیدگاه‌ها", href: "/#visitor-comments" },
-  { label: "تماس", href: "/contact" },
-];
+import { navigationItems } from "@/components/layout/navigation-items";
 
 function handleSectionClick(event: MouseEvent<HTMLAnchorElement>) {
   if (
@@ -60,7 +50,7 @@ export default function NavigationLinks() {
             <Link
               href={item.href}
               onClick={handleSectionClick}
-              className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:bg-white hover:text-blue-700 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
+              className="block rounded-lg px-2 py-2 text-[11px] font-semibold transition-colors hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-blue-600 sm:px-3 sm:text-sm"
             >
               {item.label}
             </Link>
