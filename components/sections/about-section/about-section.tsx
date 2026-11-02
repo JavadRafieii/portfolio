@@ -40,11 +40,6 @@ export default function AboutSection({ profile }: AboutSectionProps) {
     >
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:gap-8">
         <div className="relative overflow-hidden py-4 sm:py-8 lg:py-10">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -left-16 -top-20 size-64 rounded-full bg-blue-50 blur-3xl"
-          />
-
           <div className="relative">
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-700">

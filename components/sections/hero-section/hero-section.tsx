@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeftIcon, SparklesIcon } from "lucide-react";
+import { SparklesIcon } from "lucide-react";
 
 import type { PortfolioProfileValues } from "@/lib/portfolio/types";
 
@@ -13,7 +13,7 @@ export default function HeroSection({ profile }: HeroSectionProps) {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="my-30 scroll-mt-28 grid grid-cols-2 gap-10"
+      className="my-30 scroll-mt-28 grid grid-cols-2 items-center gap-10"
     >
       <div>
         <p className="inline-flex items-center gap-2 font-medium text-blue-700">
@@ -34,13 +34,6 @@ export default function HeroSection({ profile }: HeroSectionProps) {
         </div>
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl border-2 border-transparent bg-blue-600 px-5 py-3 font-medium text-white transition hover:border-gray-400 hover:bg-transparent hover:text-gray-700"
-          >
-           بیا درباره یه ایده صحبت کنیم
-            <ArrowLeftIcon aria-hidden="true" className="size-4" />
-          </Link>
-          <Link
             href="#projects"
             className="inline-flex items-center rounded-xl border border-slate-500 px-5 py-3 font-medium text-slate-800 transition hover:border-blue-600 hover:bg-blue-600 hover:text-white"
           >
@@ -49,15 +42,15 @@ export default function HeroSection({ profile }: HeroSectionProps) {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex h-full items-center justify-center">
         <Image
           src="/images/hero.png"
           alt="تصویر فردی در حال کار با لپ‌تاپ"
           width={1024}
           height={1536}
           priority
-          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 35vw, 24rem"
-          className="h-auto max-h-96 w-full max-w-sm object-contain"
+          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 40vw, 32rem"
+          className="h-auto max-h-[min(70vh,42rem)] w-full max-w-lg object-contain"
         />
       </div>
     </section>

@@ -1,6 +1,4 @@
-import Link from "next/link";
 import {
-  ArrowLeftIcon,
   BrushIcon,
   BriefcaseBusinessIcon,
   ClipboardListIcon,
@@ -118,13 +116,6 @@ export default function ServicesSection({ items }: ServicesSectionProps) {
             خوش‌ساخت همراهتان هستم.
           </p>
         </div>
-        <Link
-          href="/contact"
-          className="inline-flex w-fit shrink-0 items-center gap-2 font-semibold text-blue-700 transition-colors hover:text-blue-900"
-        >
-          دربارهٔ پروژه‌ات صحبت کنیم
-          <ArrowLeftIcon aria-hidden="true" className="size-4" />
-        </Link>
       </div>
 
       {items.length > 0 ? (
