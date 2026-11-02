@@ -49,15 +49,15 @@ export default function HeroSection({ profile }: HeroSectionProps) {
         </div>
       </div>
 
-      <div>
+      <div className="flex justify-center">
         <Image
-          src="/images/hero.webp"
+          src="/images/hero.png"
           alt="تصویر فردی در حال کار با لپ‌تاپ"
-          width={561}
-          height={462}
+          width={1024}
+          height={1536}
           priority
-          sizes="(max-width: 1024px) 100vw, 40vw"
-          className="h-auto w-full object-contain"
+          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 35vw, 24rem"
+          className="h-auto max-h-96 w-full max-w-sm object-contain"
         />
       </div>
     </section>
