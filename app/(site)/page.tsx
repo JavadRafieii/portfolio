@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/sections/projects-section/projects-sec
 import { getPortfolioProfile } from "@/lib/portfolio/data";
 import VisitorComments from "@/components/sections/visitor-comments/visitor-comments";
 import { getPortfolioReviews } from "@/lib/portfolio/reviews";
+import PortfolioChatbot from "@/components/chat/portfolio-chatbot";
 
 export default function HomePage() {
   return (
@@ -35,6 +36,7 @@ async function PortfolioSections() {
       <ExperienceSection experiences={profile?.experiences ?? []} />
       <ServicesSection items={profile?.workItems ?? []} />
       <VisitorComments comments={comments} />
+      <PortfolioChatbot />
     </>
   );
 }
