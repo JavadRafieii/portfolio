@@ -33,7 +33,7 @@ export default function ExperienceSection({
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="my-30 scroll-mt-28 w-full space-y-8"
+      className="my-16 scroll-mt-28 w-full space-y-8 sm:my-20 lg:my-30"
     >
       <header className="max-w-2xl space-y-3">
         <p className="inline-flex items-center gap-2 font-semibold text-blue-700">

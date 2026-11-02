@@ -30,11 +30,11 @@ async function AuthenticatedDashboardLayout({
 
   return (
     <MainContainer>
-      <div className="grid grid-cols-12 gap-6">
-        <aside className="col-span-4">
-          <div className="flex flex-col items-start gap-y-6 sticky top-6">
-            <div className="flex items-center gap-x-2">
-              <Avatar className="size-20">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <aside className="lg:col-span-4">
+          <div className="flex flex-col items-start gap-y-6 lg:sticky lg:top-6">
+            <div className="flex min-w-0 items-center gap-x-2">
+              <Avatar className="size-16 shrink-0 sm:size-20">
                 <AvatarFallback>
                   <UserIcon className="size-10" />
                 </AvatarFallback>
@@ -45,7 +45,9 @@ async function AuthenticatedDashboardLayout({
                   />
                 ) : null}
               </Avatar>
-              <span className="text-sm font-normal">{user.email}</span>
+              <span className="min-w-0 break-all text-sm font-normal">
+                {user.email}
+              </span>
             </div>
             <div className="flex w-full flex-col gap-2.5 rounded-2xl bg-white px-4 py-6 text-[15px] font-normal text-gray-500 shadow-[0_0_20px_0_(--shadow)]">
               <span className="text-xl font-semibold text-gray-900">
@@ -58,7 +60,7 @@ async function AuthenticatedDashboardLayout({
             </div>
           </div>
         </aside>
-        <section className="col-span-8 rounded-3xl bg-white p-10">
+        <section className="min-w-0 rounded-3xl bg-white p-4 sm:p-6 lg:col-span-8 lg:p-10">
           {children}
         </section>
       </div>

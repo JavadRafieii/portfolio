@@ -13,7 +13,7 @@ export default function HeroSection({ profile }: HeroSectionProps) {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="my-30 scroll-mt-28 grid grid-cols-2 items-center gap-10"
+      className="my-16 scroll-mt-28 grid grid-cols-1 items-center gap-8 sm:my-20 lg:my-30 lg:grid-cols-2 lg:gap-10"
     >
       <div>
         <p className="inline-flex items-center gap-2 font-medium text-blue-700">
@@ -23,7 +23,7 @@ export default function HeroSection({ profile }: HeroSectionProps) {
         <div className="my-5">
           <h1
             id="hero-title"
-            className="text-5xl font-black leading-tight text-slate-900 mb-5"
+            className="mb-5 text-4xl font-black leading-tight text-slate-900 sm:text-5xl"
           >
             {profile?.title || "طراحی و توسعهٔ تجربه‌های دیجیتال"}
           </h1>
@@ -49,7 +49,7 @@ export default function HeroSection({ profile }: HeroSectionProps) {
           width={1024}
           height={1536}
           priority
-          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 40vw, 32rem"
+          sizes="(max-width: 1023px) 90vw, 32rem"
           className="h-auto max-h-[min(70vh,42rem)] w-full max-w-lg object-contain"
         />
       </div>

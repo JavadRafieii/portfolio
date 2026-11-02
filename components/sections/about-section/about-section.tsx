@@ -36,7 +36,7 @@ export default function AboutSection({ profile }: AboutSectionProps) {
     <section
       id="about"
       aria-labelledby="about-title"
-      className="my-30 scroll-mt-28 w-full rounded-[2rem] border border-slate-100 bg-white p-5 shadow-xl shadow-slate-900/[0.04] sm:p-8 lg:p-10"
+      className="my-16 scroll-mt-28 w-full rounded-[2rem] border border-slate-100 bg-white p-5 shadow-xl shadow-slate-900/[0.04] sm:my-20 sm:p-8 lg:my-30 lg:p-10"
     >
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:gap-8">
         <div className="relative overflow-hidden py-4 sm:py-8 lg:py-10">
@@ -86,7 +86,7 @@ export default function AboutSection({ profile }: AboutSectionProps) {
                 <div className="mt-7 border-b border-white/15 pb-6">
                   <p className="text-sm text-blue-100">تجربهٔ حرفه‌ای</p>
                   <div className="mt-1 flex items-baseline gap-2">
-                    <span className="text-6xl font-black tracking-tight">
+                    <span className="text-5xl font-black tracking-tight sm:text-6xl">
                       {profile.yearsOfExperience.toLocaleString("fa-IR")}
                     </span>
                     <span className="font-medium text-blue-100">سال</span>

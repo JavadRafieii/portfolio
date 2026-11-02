@@ -97,7 +97,7 @@ export default function ServicesSection({ items }: ServicesSectionProps) {
     <section
       aria-labelledby="services-heading"
       id="services"
-      className="my-30 scroll-mt-28 w-full space-y-8"
+      className="my-16 scroll-mt-28 w-full space-y-8 sm:my-20 lg:my-30"
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl space-y-3">
