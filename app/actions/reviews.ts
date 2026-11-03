@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 
 import { auth } from "@/auth";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -80,6 +80,7 @@ export async function savePortfolioReview(
     };
   }
 
+  updateTag("portfolio-reviews");
   revalidatePath("/dashboard");
 
   return {

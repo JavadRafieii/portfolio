@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cacheLife, cacheTag } from "next/cache";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type {
   PortfolioExperience,
@@ -77,6 +78,11 @@ function parseArray<Value>(
 }
 
 export async function getPortfolioProfile(): Promise<PortfolioProfileValues | null> {
+  "use cache";
+
+  cacheLife("hours");
+  cacheTag("portfolio-profile");
+
   const supabase = createSupabaseAdminClient();
   const { data, error } = await supabase
     .from("portfolio_profiles")

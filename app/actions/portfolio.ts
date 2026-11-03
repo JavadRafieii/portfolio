@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { isPortfolioAdmin } from "@/lib/portfolio/access";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type {
@@ -322,7 +322,7 @@ export async function savePortfolio(
   }
 
   revalidatePath("/dashboard");
-  revalidatePath("/");
+  updateTag("portfolio-profile");
 
   return {
     status: "success",
